@@ -3,6 +3,9 @@ const users = require("./MOCK_DATA.json");
 const app = express();
 const PORT = 8000;
 
+// middleware - plugin
+app.use(express.urlencoded({ extended: false }));
+
 // Routes
 app.get("/users", (req,res) => {
     const html =`
@@ -24,16 +27,17 @@ app
 .patch((req, res) => {
 // Edit user with id
     return res.json({ status: "pending"});
-});
+})
 .delete((req, res) => {
     // Delete user with id
     return res.json({ status: "pending"});
 });
-});
 
 app.post("/api/users", (req,res) => {
     // ToDo: Create new user
-    t=return res.json({ status: "pending"});
+    const body = req.body;
+    console.log("Body", body);
+    return res.json({ status: "pending"});
 });
 
 // app.patch("/api/users/:id", (req,res) => {
@@ -47,3 +51,4 @@ app.post("/api/users", (req,res) => {
 // });
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`))
+
